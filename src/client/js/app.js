@@ -24,9 +24,9 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 // global variables of urls requests
-    urlRooms = "http://serv196.corp.eldorado.org.br/siscorpservices/exchange.asmx/Rooms";
-    urlRoomsId = "http://serv196.corp.eldorado.org.br/siscorpservices/exchange.asmx/RoomsId";
-    urlDefault = "http://serv196.corp.eldorado.org.br/Get_A_Room_Files/";
+    urlRooms = "http://requestserver/Rooms";
+    urlRoomsId = "http://requestserver/RoomsId";
+    urlDefault = "http://serverfiles/Get_A_Room_Files/";
 
 // ready function
     $(document).ready(function() {

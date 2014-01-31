@@ -67,8 +67,8 @@ namespace ExchangeBackEndApp.Controllers
             bool credenciaisValidas;
 
             var entry = new DirectoryEntry(
-                "LDAP://serv051/OU=users_funcionarios,OU=eldorado_user,DC=eldorado,DC=org,DC=br",
-                login + "@" + "eldorado.org.br",
+                "LDAP://domain/
+                login + "@" + "domain.com",
                 senha);
 
             try
