@@ -1,0 +1,277 @@
+/*
+Copyright (c) 2013, Colaboradores do INSTITUTO DE PESQUISAS ELDORADO
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided 
+that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the 
+following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the 
+following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the INSTITUTO DE PESQUISAS ELDORADO nor the names of its contributors may be used to endorse or promote 
+products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/ 
+
+body {
+	text-align: center;
+	width: 100%; }
+
+.clear { clear: both; }
+
+#SalasCampinas {  }
+
+.procurar { }
+
+#container {
+	position: absolute;
+	width: 100%;
+	height: 100%; }
+
+.ui-icon-datebox { background-position: 99% 8px!important; }
+
+.espec {
+	font-size: 50%;
+	vertical-align: middle;
+	text-align: center;
+	font-weight: normal;
+    text-shadow: none;
+}
+
+.letramenor { font-size: 250%; }
+
+.letra { font-size: 350%; }
+
+.letra, .letramenor {
+	vertical-align: middle;
+	text-align: center;
+	font-weight: bold;
+    text-shadow: none;
+	line-height: 100%; }
+
+.livre { background: #48C181; }
+
+.parcial { background: #F5AE47; }
+
+.ocupada { background: #C83D47; }
+
+.inativa { background: #414042; 
+    color: #707070;}
+
+.sala {  }
+
+.sair { font-size: 100%; }
+
+.escritoSalaFacil {
+	text-align: right;
+	float: right;
+	line-height: 30px;
+	vertical-align: bottom; }
+
+.escritoSalas {
+    line-height: 41px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 1px;
+    float: left;
+	display: block;
+	text-align: left;
+	font-size: 100%;
+	font-weight: 500;
+    margin-left: 11%; }
+
+.center {
+	margin: auto;
+	text-align: center; }
+
+.left { float: left; }
+
+.right { float: right; }
+
+.formlogin-input { width: 60%; }
+.formlogin-submit { width: 60%; }
+
+.submit-button { 
+}
+
+    .submit-button div, .formlogin-submit div{
+		background: #F8971D; 
+		color: white;
+        border: none;
+    }
+	.submit-button div.ui-btn-hover-c a.ui-link-inherit, .submit-button div.ui-btn-hover-c:hover ,
+	.formlogin-submit div.ui-btn-hover-c a.ui-link-inherit, .formlogin-submit div.ui-btn-hover-c:hover {
+		background: #F8971D; 
+		color: white;
+        border: none;
+		font-weight: normal; }
+
+.ui-loader-background {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	margin: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: none;
+	position: fixed;
+	z-index: 100; }
+
+.ui-loading .ui-loader-background { display: block; }
+
+.ui-bar-e {
+	text-shadow: 0 1px 0 #FFF;
+	border: none;
+	text-align: center; /*1px solid #000000;*/
+	margin: 2% auto;
+	width: 100%;
+	padding: 0; }
+
+.ui-bar {
+	text-shadow: 0 1px 0 #FFF;
+	font-size: 25px;
+	text-align: center;
+	margin: 2% auto;
+	width: 100%;
+	padding: 0; }
+
+.ui-btn-up-c {
+	/*border: 1px solid black; */
+}
+
+.ui-header-fixed {
+	top: 18px;
+	padding-top: 1px; }
+
+.footer {
+	margin-left: 3%;
+	margin-right: 3%; }
+
+.ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d {  }
+
+.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c {
+	margin: 1%;
+	width: 30%;
+	height: 15%; }
+
+#gradeCampinas, #gradeBrasilia, #gradePortoAlegre {
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 83%; }
+
+.ui-btn-up-c {
+	font-weight: 500;
+	color: #FFF; }
+
+#boxHorarioInicio {
+    padding-top: 1px;
+	color: white; }
+
+#boxHorarioInicio .ui-btn-up-c ,
+#boxHorarioFinal .ui-btn-up-c {
+    background: #333;
+    color: white;
+};
+
+#boxHorarioFinal {
+	margin-left: 0; 
+    padding-top: 1px;
+	color: white; }
+
+.boxCidade {
+	margin-left: 0;
+}
+
+#boxCidadeCPS, #boxCidadeBSB, #boxCidadePOA {
+	/*width: 100%;*/
+	margin-left:  0;
+	margin-right: 0;
+	color: white; }
+
+#HorarioInicioCPS, #HorarioInicioBSB, #HorarioInicioPOA, 
+        #HorarioFinalCPS, #HorarioFinalBSB, #HorarioFinalPOA {
+    padding: 0 30px;
+	height: 41px;
+    line-height: 41px;
+	text-align: left;
+	float: left; }
+
+#boxHorarioInicio div.ui-br ,
+#boxHorarioFinal div.ui-br {
+    padding: 0;
+}
+
+.label-time {
+    height: 41px;
+    line-height: 41px;
+    margin: auto;
+    vertical-align: middle;
+    float: left;
+}
+
+.header {
+	margin-left: 10%;
+	margin-right: 10%; }
+
+/* .ui-grid-e>:nth-child(n) { width: 25%; } */
+
+.ui-body-c, .ui-overlay-c {
+	border: 1px solid #aaa;
+	color: #FFFFFF;
+	background: url(background.jpg) no-repeat center;
+	background-size: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	text-shadow: 0 0px 0 #fff; }
+
+.ui-btn-hover-c, .ui-btn-up-c {
+	background: white;
+    color: black;
+ }
+
+.ui-btn-hover-c a {
+	background: white;
+	color: black;
+	font-weight: normal; }
+
+	.ui-btn-hover-c a.ui-link-inherit, .ui-btn-hover-c:hover {
+/*		
+		background: #F8971D; 
+*/		
+        background: white;
+		color: black;
+		font-weight: normal; }
+
+.ui-field-contain, .ui-mobile fieldset.ui-field-contain, .ui-btn {
+    margin: 0 auto;
+}
+
+input {
+    -webkit-user-select: auto !important;
+}
+
+.ui-grid-e .ui-block-a {
+    width: 44%;
+}
+
+.ui-grid-e .ui-block-b {
+    width: 56%;
+}
+
+.ui-btn-icon-left .ui-btn-inner {
+} 
+
+.ui-field-contain .ui-select {
+    width: 100%;
+}
+

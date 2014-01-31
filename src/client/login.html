@@ -1,0 +1,141 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Sala Facil</title> 
+	<script src="cordova-2.9.0.js"></script>
+	<link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet"  href="css/app.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery.mobile-1.3.2.js"></script>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+	<script type="text/javascript">
+
+    urlDefault = "http://serv196.corp.eldorado.org.br/Get_A_Room_Files/";
+    urlLogin = "http://serv196.corp.eldorado.org.br/siscorpservices/exchange.asmx/UserSession";
+
+    $(document).ready(function() 
+    {
+        //$.mobile.loading( 'show' ); 
+        $.ajax({
+            url: urlDefault,
+            type: 'GET',
+            complete: function(data){
+                var xml = $.parseXML(data.responseText)
+                urlLogin = $(xml).find("urlLogin").text();
+            }
+        });
+
+    });
+
+    function formSubmit()
+    {
+        $.mobile.loading( 'show' ); 
+
+            //getStringFromUsername
+            var user = $("#usuario").val();
+            //passa para algum lugar para autenticar
+            $("#user").val(user);
+
+            //getStringFromPassword
+            var senha = $("#senha").val();
+            //passa para algum lugar para autenticar
+            $("#senha").val(senha);
+
+        url = urlLogin; 
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: 'username='+user+'&password='+senha,
+            complete: function(data){
+                $.mobile.loading( 'hide' ); //Hide spinner
+
+            	if (data.responseText.length == 0)
+            	{
+            		alert("Falha na conexão.");
+            	}
+                else if (data.responseText.indexOf('failed') == -1 && data.responseText.length > 0)
+                {
+                	window.localStorage.setItem("usuario", $("#usuario").val());
+                	
+                    if (window.localStorage.getItem("cidade") == null)
+                    {
+                        window.localStorage.setItem("cidade", "#SalasCampinas");
+                    }
+                    window.location.href =  'GetARoom.html' + window.localStorage.getItem("cidade");
+                }
+                else 
+                {
+                    alert('Login e/ou senha invalidos');
+                    $("#usuario").val("");
+                    $("#senha").val("");
+                }
+            }
+        });
+		
+    }
+
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+    // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+    function onDeviceReady() {
+        // Register the event listener
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+
+    // Handle the back button
+    function onBackKeyDown() {
+        navigator.app.exitApp();
+    }
+		
+    </script>
+
+
+</head> 
+
+<body> 
+   
+    <div class="ui-loader-background"></div>
+    <div id="tempo"></div>
+	
+	<div data-role="page" id="Autenticacao" class="type-interior">
+
+		<div class="header">
+		
+		<br>
+        <div>
+            <img src="css/images/eldorado.png" alt="Eldorado"
+            style="text-align:left;float:left;height:30px;">
+            <img class="escritoSalaFacil" src="css/images/salafacil.png" alt="Eldorado"
+            style="text-align:right;float:right;height:30px;">
+        </div>
+    
+        <div class="clear"></div>
+		
+		<br>
+		
+                    <form id="formlogin">
+		<div data-role="content">
+                <div class="formlogin-input center">
+					<span class="">USUÁRIO </span>
+                    <input type="text"  id="usuario" value="">
+                </div>
+                <div class="formlogin-input center">
+					<span class="">SENHA </span>
+                    <input type="password" data-clear-btn="false"  id="senha" value="" autocomplete="off">
+                </div>
+                <br>
+                <div class="center formlogin-submit">
+                    <input type="button" data-theme="c" id="logar"
+                        value="ENTRAR" onclick="formSubmit()">
+                </div>
+						
+		</div>
+                    </form>
+		<br> 
+		<br>
+	</div>
+	</div>
+	
+</body>
+</html>

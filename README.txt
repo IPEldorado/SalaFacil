@@ -1,0 +1,1 @@
+SalaFacil (EasyRoom) is a easy way to request a room at your organization instead of opening Outlook.

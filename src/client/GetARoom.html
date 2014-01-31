@@ -1,0 +1,534 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	
+	<title>Sala Facil</title> 
+	<script src="cordova-2.9.0.js"></script>
+
+	<link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />
+
+	<link rel="stylesheet"  href="css/app.css" />
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.mobile-1.3.2.js"></script>
+
+    <script src="js/app.js"></script>
+	
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head> 
+
+<body> 
+    <div class="ui-loader-background"></div>
+    <div id="cidade"></div>
+    <div id="horaIni"></div>
+    <div id="horaFim"></div>
+
+	<!-- BUSCAR SALAS -->
+
+    <div data-role="page" id="SalasCampinas" class="type-interior">
+	
+	<div class="header">
+		<br>
+        <div>
+            <img src="css/images/eldorado.png" alt="Eldorado"
+            style="text-align:left;float:left;height:30px;">
+            <img class="escritoSalaFacil" src="css/images/salafacil.png" alt="Eldorado"
+            style="text-align:right;float:right;height:30px;">
+        </div>
+    
+        <div class="clear"></div>
+		<br>
+		<br>
+		
+	<div>	
+	
+	<div class="ui-grid-e">
+
+        <div id="boxHorarioInicio" class="ui-block-a">
+            <div data-role="fieldcontain">
+                <div class="left">
+                    <select name="select-choice-1" id="HorarioInicioCPS"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+
+        <div id="boxHorarioFinal" class="ui-block-b">
+            <div data-role="fieldcontain">
+                <div class="label-time"> 
+                    <span>Até </span>
+                </div>
+                <div class="right">
+                    <select name="select-choice-1" id="HorarioFinalCPS"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+<option value="19:00">19:00</option><option value="19:15">19:15</option><option value="19:30">19:30</option><option value="19:45">19:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <br>
+       
+        <div class="ui-block-a">
+            <div data-role="popup" id="popupMenuCPS" data-theme="a" data-position-to="window">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
+                    <li data-role="divider" data-theme="a">Unidade</li>
+                    <li><a href="#SalasCampinas" onclick="fechaCidades(this)">CPS</a></li>
+                    <li><a href="#SalasBrasilia" onclick="fechaCidades(this)">BSB</a></li>
+                    <li><a href="#SalasPortoAlegre" onclick="fechaCidades(this)">POA</a></li>
+                </ul>
+            </div>
+            <div class="left boxCidade medium-button submit-button">
+                <a id="boxCidadeCPS" href="#popupMenuCPS" data-theme="a" data-rel="popup" data-role="button" data-inline="true">CPS</a>
+            </div>
+        </div>
+        
+        <div class="ui-block-b">
+            <div class="medium-button submit-button right">
+                <button class="procurar" onclick="solicitaEstados()">BUSCAR</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div><!-- /grid-e -->
+
+    <div class="clear"></div>
+    <br>
+		
+    </div>
+    </div>
+
+			<div id="gradeCampinas" class="ui-grid-b">
+                <div class="ui-block-a">
+                    <div id="salaReuniaoC"  class="ui-bar ui-bar-e inativa">
+                        <span class="espec">REUNIÃO</span>
+                        <div class="clear"></div>
+                        <span class="letra">C</span>
+                        <div id="estadosalaReuniaoC"></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div id="salaReuniaoD"  class="ui-bar ui-bar-e inativa">
+                        <span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">D</span></span>
+                        <div id="estadosalaReuniaoD"></div>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div id="salaApoio03"  class="ui-bar ui-bar-e inativa">
+                        <span class="sala"><span class="espec">APOIO</span><br> <span class="letra">3</span></span>
+                        <div id="estadosalaApoio03"></div>
+                    </div>
+                </div>
+                <div class="ui-block-a">
+                    <div id="salaApoio04" class="ui-bar ui-bar-e inativa" >
+                        <span class="sala"><span class="espec">APOIO</span><br> <span class="letra">4</span></span>
+                        <div id="estadosalaApoio04"></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div id="salaApoio05" class="ui-bar ui-bar-e inativa" >
+                        <span class="sala"><span class="espec">APOIO</span><br> <span class="letra">5</span></span>
+                        <div id="estadosalaApoio05"></div>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div id="salaApoio06" class="ui-bar ui-bar-e inativa" >
+                        <span class="sala"><span class="espec">APOIO</span><br> <span class="letra">6</span></span>
+                        <div id="estadosalaApoio06"></div>
+                    </div>
+                </div>
+                <div class="ui-block-a">
+                    <div id="salaApoio10" class="ui-bar ui-bar-e inativa"
+                        style="height:110px">
+                        <span class="sala"><span class="espec">APOIO</span><br>
+                            <span class="letramenor">10</span></span>
+                        <div class="clear"></div>
+                        <div id="estadosalaApoio10"></div>
+                    </div>
+                </div>
+            </div> <!-- div.gradecampinas -->
+            <br>
+            <br>
+            <br>
+            <div class="footer">
+                <img src="css/images/status.png" alt="status"
+                style="text-align:center;float:center;height: 100%;width: 100%;max-height: 50px;max-width: 500px;">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img class="sair"src="css/images/logout.png" alt="status"
+                style="text-align:center;float:center;">
+                <br>
+            </div>
+	</div>
+	
+	
+	<div data-role="page" id="SalasBrasilia" class="type-interior">
+
+	<div class="header">
+		<br>
+        <div>
+            <img src="css/images/eldorado.png" alt="Eldorado"
+            style="text-align:left;float:left;height:30px;">
+            <img class="escritoSalaFacil" src="css/images/salafacil.png" alt="Eldorado"
+            style="text-align:right;float:right;height:30px;">
+        </div>
+    
+        <div class="clear"></div>
+		
+		<br>
+		<br>
+
+	<div>	
+	
+	<div class="ui-grid-e">
+    
+        <div id="boxHorarioInicio" class="ui-block-a">
+            <div data-role="fieldcontain">
+                <div class="left">
+                    <select name="select-choice-1" id="HorarioInicioBSB"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+        <div id="boxHorarioFinal" class="ui-block-b">
+            <div data-role="fieldcontain">
+                <div class="label-time" > 
+                    <span>Até</span>
+                </div>
+                <div class="right">
+                    <select name="select-choice-1" id="HorarioFinalBSB"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+<option value="19:00">19:00</option><option value="19:15">19:15</option><option value="19:30">19:30</option><option value="19:45">19:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <br>
+       
+        <div class="ui-block-a">
+            <div data-role="popup" id="popupMenuBSB" data-theme="a" data-position-to="window">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
+                    <li data-role="divider" data-theme="a">Unidade</li>
+                    <li><a href="#SalasCampinas" onclick="fechaCidades(this)">CPS</a></li>
+                    <li><a href="#SalasBrasilia" onclick="fechaCidades(this)">BSB</a></li>
+                    <li><a href="#SalasPortoAlegre" onclick="fechaCidades(this)">POA</a></li>
+                </ul>
+            </div>
+            <div class="left boxCidade medium-button submit-button">
+                <a id="boxCidadeBSB" href="#popupMenuBSB" data-theme="a"
+                    data-rel="popup" data-role="button" data-inline="true">BSB</a>
+            </div>
+        </div>
+        
+        <div class="ui-block-b">
+            <div class="medium-button submit-button right">
+                <button class="procurar" onclick="solicitaEstados()">BUSCAR</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+	
+    </div><!-- /grid-e -->
+
+    <div class="clear"></div>
+    <br>
+		
+    </div>
+    </div>
+
+		<br>
+
+            <div class="clear"></div>
+			
+			<div id="gradeBrasilia" class="ui-grid-b">
+			
+			<div class="ui-block-a"><div id="salaReuniaoA.BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">A</span></span>
+					<div id="estadosalaReuniaoA.BSB"></div></div></div>
+			
+			<div class="ui-block-b"><div id="salaReuniaoB.BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">B</span></span>
+					<div id="estadosalaReuniaoB.BSB"></div></div></div>
+			
+			<div class="ui-block-c"><div id="salaReuniaoC.BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">C</span></span>
+					<div id="estadosalaReuniaoC.BSB"></div></div></div>
+			
+			<div class="ui-block-a"><div id="salaReuniaoD.BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">D</span></span>
+					<div id="estadosalaReuniaoD.BSB"></div></div></div>	
+			
+			<div class="ui-block-b"><div id="salaApoio01BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">1</span></span>
+					<div id="estadosalaApoio01BSB"></div></div></div>
+			
+			<div class="ui-block-c"><div id="salaApoio02BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">2</span></span>
+					<div id="estadosalaApoio02BSB"></div></div></div>
+			
+			<div class="ui-block-a"><div id="salaApoio03BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">3</span></span>
+					<div id="estadosalaApoio03BSB"></div></div></div>
+			
+			<div class="ui-block-b"><div id="salaApoio04BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">4</span></span>
+					<div id="estadosalaApoio04BSB"></div></div></div>
+			
+			<div class="ui-block-c"><div id="salaApoio05BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">5</span></span>
+					<div id="estadosalaApoio05BSB"></div></div></div>
+			
+			<div class="ui-block-a"><div id="salaApoio06BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">6</span></span>
+					<div id="estadosalaApoio06BSB"></div></div></div>
+			
+			<div class="ui-block-b"><div id="salaApoio07BSB"class="ui-bar ui-bar-e inativa">
+				<span class="sala"><span class="espec">APOIO</span><br> <span class="letra">7</span></span>
+					<div id="estadosalaApoio07BSB"></div></div></div>
+	
+        </div> <!-- div.gradebsb -->
+            <br>
+            <br>
+            <br>
+            <div class="footer">
+                <img src="css/images/status.png" alt="status"
+                style="text-align:center;float:center;height: 100%;width: 100%;max-height: 50px;max-width: 500px;">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img class="sair"src="css/images/logout.png" alt="status"
+                style="text-align:center;float:center;">
+                <br>
+            </div>
+
+	</div>
+
+
+
+    <div data-role="page" id="SalasPortoAlegre" class="type-interior">
+
+	<div class="header">
+		<br>
+        <div>
+            <img src="css/images/eldorado.png" alt="Eldorado"
+            style="text-align:left;float:left;height:30px;">
+            <img class="escritoSalaFacil" src="css/images/salafacil.png" alt="Eldorado"
+            style="text-align:right;float:right;height:30px;">
+        </div>
+    
+        <div class="clear"></div>
+		
+		<br>
+		<br>
+
+	<div>	
+	
+	<div class="ui-grid-e">
+
+        <div id="boxHorarioInicio" class="ui-block-a">
+            <div data-role="fieldcontain">
+                <div class="left">
+                    <select name="select-choice-1" id="HorarioInicioPOA"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+        <div id="boxHorarioFinal" class="ui-block-b">
+            <div data-role="fieldcontain">
+                <div class="label-time"> 
+                    <span>Até</span>
+                </div>
+                <div class="right">
+                    <select name="select-choice-1" id="HorarioFinalPOA"> 
+<option value="08:00">08:00</option><option value="08:15">08:15</option><option value="08:30">08:30</option><option value="08:45">08:45</option>
+<option value="09:00">09:00</option><option value="09:15">09:15</option><option value="09:30">09:30</option><option value="09:45">09:45</option>
+<option value="10:00">10:00</option><option value="10:15">10:15</option><option value="10:30">10:30</option><option value="10:45">10:45</option>
+<option value="11:00">11:00</option><option value="11:15">11:15</option><option value="11:30">11:30</option><option value="11:45">11:45</option>
+<option value="12:00">12:00</option><option value="12:15">12:15</option><option value="12:30">12:30</option><option value="12:45">12:45</option>
+<option value="13:00">13:00</option><option value="13:15">13:15</option><option value="13:30">13:30</option><option value="13:45">13:45</option>
+<option value="14:00">14:00</option><option value="14:15">14:15</option><option value="14:30">14:30</option><option value="14:45">14:45</option>
+<option value="15:00">15:00</option><option value="15:15">15:15</option><option value="15:30">15:30</option><option value="15:45">15:45</option>
+<option value="16:00">16:00</option><option value="16:15">16:15</option><option value="16:30">16:30</option><option value="16:45">16:45</option>
+<option value="17:00">17:00</option><option value="17:15">17:15</option><option value="17:30">17:30</option><option value="17:45">17:45</option>
+<option value="18:00">18:00</option><option value="18:15">18:15</option><option value="18:30">18:30</option><option value="18:45">18:45</option>
+<option value="19:00">19:00</option><option value="19:15">19:15</option><option value="19:30">19:30</option><option value="19:45">19:45</option>
+                    </select>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <br>
+       
+        <div class="ui-block-a">
+            <div data-role="popup" id="popupMenuPOA" data-theme="a" data-position-to="window">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
+                    <li data-role="divider" data-theme="a">Unidade</li>
+                    <li><a href="#SalasCampinas" onclick="fechaCidades(this)">CPS</a></li>
+                    <li><a href="#SalasBrasilia" onclick="fechaCidades(this)">BSB</a></li>
+                    <li><a href="#SalasPortoAlegre" onclick="fechaCidades(this)">POA</a></li>
+                </ul>
+            </div>
+            <div class="left boxCidade medium-button submit-button">
+                <a id="boxCidadePOA" href="#popupMenuPOA" data-theme="a"
+                    data-rel="popup" data-role="button" data-inline="true">POA</a>
+            </div>
+        </div>
+        
+        <div class="ui-block-b">
+            <div class="medium-button submit-button right">
+                <button class="procurar" onclick="solicitaEstados()">BUSCAR</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+	
+    </div><!-- /grid-e -->
+
+    <div class="clear"></div>
+    <br>
+		
+    </div>
+    </div>
+
+		<br>
+            <div class="clear"></div>
+			
+        <div id="gradePortoAlegre" class="ui-grid-b">
+			
+			<div class="ui-block-a"><div id="salaReuniaoA.POA"class="ui-bar ui-bar-e inativa">
+			<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">A</span></span>
+			<div id="estadosalaReuniaoA.POA"></div></div></div>
+			
+			<div class="ui-block-b"><div id="salaReuniaoB.POA"class="ui-bar ui-bar-e inativa">
+			<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">B</span></span>
+			<div id="estadosalaReuniaoB.POA"></div></div></div>
+			
+			<div class="ui-block-c"><div id="salaReuniaoC.POA"class="ui-bar ui-bar-e inativa">
+			<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">C</span></span>
+			<div id="estadosalaReuniaoC.POA"></div></div></div>
+			
+			<div class="ui-block-a"><div id="salaReuniaoD.POA"class="ui-bar ui-bar-e inativa">
+			<span class="sala"><span class="espec">REUNIÃO</span><br> <span class="letra">D</span></span>
+			<div id="estadosalaReuniaoD.POA"></div></div></div>
+
+        </div> <!-- div.gradePOA -->
+            <br>
+            <br>
+            <br>
+            <div class="footer">
+                <img src="css/images/status.png" alt="status"
+                style="text-align:center;float:center;height: 100%;width: 100%;max-height: 50px;max-width: 500px;">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img class="sair"src="css/images/logout.png" alt="status"
+                style="text-align:center;float:center;">
+                <br>
+            </div>
+
+	</div>
+
+	<!-- Pï¿½GINA CONFIRMAï¿½ï¿½O DE RESERVA -->	
+    <div data-role="page" id="reservou" class="type-interior">
+
+		<div data-role="header" data-theme="a">
+			<h3> Sucesso </h3>
+		</div><!-- /header -->
+			
+		<br>
+		<br>
+		
+        <ul data-role="button" >
+		
+		<br>
+		<br>
+		
+			<a href="#" id="reservaSala" data-role="button" type="v" data-theme="a"
+                data-icon="check" data-iconpos="bottom"
+                onclick="reloadStatus()">Sala Reservada com sucesso! </a>	
+        </ul>
+    </div>	
+	
+	
+	<!-- Pï¿½GINA PROIBINDO RESERVA -->	
+    <div data-role="page" id="nreservou" class="type-interior">
+
+		<div data-role="header" data-theme="a">
+			<h3>Ocupada</h3>
+		</div><!-- /header -->
+			
+		<br>
+		<br>
+		
+        <ul data-role="button" >
+		
+		<br>
+		<br>
+		
+        <a href="#" data-role="button" type="v" data-theme="a" 
+            data-icon="delete" data-iconpos="bottom"
+            onclick="reloadStatus()">Esta sala não pode ser reservada!</a>	
+        </ul>
+    </div>	
+	
+</body>
+</html>
+

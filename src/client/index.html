@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Get a Room</title> 
+	<link rel="stylesheet"  href="css/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery.mobile-1.3.2.js"></script>
+
+	<script type="text/javascript">
+
+    $(document).ready(function() {
+		escolhe();
+    });
+
+    function escolhe(){
+        if(window.localStorage.getItem("usuario")!=null)
+        {
+            if (window.localStorage.getItem("cidade") == null)
+            {
+                window.localStorage.setItem("cidade", "#SalasCampinas");
+            }
+            window.location.href =  'GetARoom.html' + window.localStorage.getItem("cidade") ;
+        }
+        else{
+			window.localStorage.setItem("cidade", "#SalasCampinas");
+            window.location.href =  'login.html' ;
+        }
+    }
+				
+
+    </script>
+</head> 
+
+<body> 
+</body>
+</html>
