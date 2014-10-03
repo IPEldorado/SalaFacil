@@ -192,6 +192,107 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         });
     }
 
+	/**
+	 * Opens the camera to read a QR code and redirect to confirmation screen
+	 */
+	function solicitarQrCode() {
+		cordova.plugins.barcodeScanner.scan(
+			function (result) {
+				if(result.text!=null) {
+					var d = new Date();
+					var hour = d.getHours();
+					var mins = d.getMinutes();
+
+					if (mins >= 45) {
+						hour++;
+						mins = 0;
+					} else {
+						while((mins % 15) != 0) {
+							mins++;
+						}
+					}
+				}
+
+				var horaInicio = hour + ":" + ((mins < 10) ? "0" : "") + mins;
+				var horaFim = hour+1 + ":" + ((mins < 10) ? "0" : "") + mins;
+
+				idSalaQrCode = result.text;
+
+				solicitaEstadoQRCode(idSalaQrCode);
+			}
+		)
+	}
+
+	/**
+	 * Scheduling of the room through QR code
+	 */
+	function agendaViaQrCode() {
+		$.mobile.loading( 'show' );
+		agendaSala(idSalaQrCode, $("#horaIni").val(), $("#horaFim").val());
+	}
+
+	/**
+	 * Requests the status of the room to show in the confirmation dialog
+	 */
+	function solicitaEstadoQRCode(idSala) {
+		$.mobile.loading( 'show' );
+
+		cidade = window.localStorage.getItem("cidade");
+        if (cidade == "#SalasCampinas") {
+            $("#horaIni").val($("#HorarioInicioCPS").val());
+            $("#horaFim").val($("#HorarioFinalCPS").val());
+        }
+        if (cidade == "#SalasBrasilia") {
+            $("#horaIni").val($("#HorarioInicioBSB").val());
+            $("#horaFim").val($("#HorarioFinalBSB").val());
+        }
+        if (cidade == "#SalasPortoAlegre") {
+            $("#horaIni").val($("#HorarioInicioPOA").val());
+            $("#horaFim").val($("#HorarioFinalPOA").val());
+        }
+
+        $.ajax({
+            url: urlRooms,
+            type: 'POST',
+            data: 'tempo='+$("#tempo").val() +
+            '&cidade='+cidade+
+			'&horaIni='+$("#horaIni").val()+
+            '&horaFim='+$("#horaFim").val(),
+            dataType: "json",
+            complete: function(data){
+                $.mobile.loading( 'hide' );
+
+                // fills each room with correspondent status
+                $.each($.parseJSON(data.responseText), function(key,value){
+					if (key == idSala) {
+						$("#salaQrCode").removeClass('inativa');
+						$("#salaQrCode").removeClass('ocupada');
+						$("#salaQrCode").removeClass('parcial');
+						$("#salaQrCode").removeClass('livre');
+						$("#salaQrCode").attr('onclick', null);
+						$("#salaQrCode").removeClass('ui-bar-e');
+						$("#salaQrCode").addClass(value);
+
+						var desc = getDescSala(key);
+						$("#descQrCode").text(desc.split(' ')[0]);
+						$("#letraQrCode").text(desc.split(' ')[1]);
+
+						// if the room is not available, shows a message informing the user
+						if (value == 'livre') {
+							$("#sala_nao_disponivel").hide();
+							$("#opcoes_confirmacao").show();
+						} else {
+							$("#sala_nao_disponivel").show();
+							$("#opcoes_confirmacao").hide();
+						}
+
+						window.location.href = window.location.href.split('#')[0] + "#confirma_qr_code";
+					}
+                });
+            }
+        });
+	}
+
     // Get status from rooms of a city
     function solicitaEstados()
     {
@@ -308,15 +409,19 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             $("#horaFim").val($("#HorarioFinalPOA").val());
         }
 
+		agendaSala(sala.id, $("#horaIni").val(), $("#horaFim").val());
+    }
+
+	function agendaSala(salaId, horaIni, horaFim) {
         url = urlRoomsId;		
         $.ajax({
             url: url,
             type: 'POST',
-            data: 'sala='+sala.id +
+            data: 'sala='+salaId +
                 '&tempo='+$("#tempo").val() + '&user=' +
                 window.localStorage.getItem("usuario") +
-                '&horaIni='+$("#horaIni").val()+
-                '&horaFim='+$("#horaFim").val(),
+                '&horaIni='+horaIni+
+                '&horaFim='+horaFim,
             beforeSend: function() { $.mobile.loading( 'show' ); }, //Show spinner
             complete: function(data){
                 $.mobile.loading( 'hide' ); //Hide spinner
@@ -333,7 +438,7 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 }
             }
         });
-    }   
+	}
 	
     // Set city parameter 
 	function solicitaCidade(cidade)
@@ -446,4 +551,13 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         window.onscroll = function(e){e.preventDefault();}
     }
 
+	// used to store the ID of the room which will be scheduled
+	var idSalaQrCode;
 
+	// maps the description with the ID of the room
+	var salasIdDesc = {"salaReuniaoC":"REUNIÃO C", "salaReuniaoD":"REUNIÃO D", "salaApoio03":"APOIO 3", "salaApoio04":"APOIO 4", "salaApoio05":"APOIO 5", "salaApoio06":"APOIO 6", "salaApoio10":"APOIO 10"};
+
+	// returns the description of the room with the received ID
+	function getDescSala(idSala){
+		return salasIdDesc[idSala];
+	}
