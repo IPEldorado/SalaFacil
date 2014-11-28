@@ -144,6 +144,22 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             invalidaEstados();
         });
 	});
+	
+	/**
+	 * Refresh the status of all the room according to the last selected time range
+	 */
+	function atualizaEstados() {
+		var horaInicio = $("#HorarioInicioCPS").val();
+		var horaFim = $("#HorarioFinalCPS").val();
+		
+		// sets the last selected time
+		$($($("#HorarioInicioCPS").parents()[1]).find('span')[2]).text(horaInicio);
+		$("#HorarioInicioCPS").val(horaInicio);
+		$($($("#HorarioFinalCPS").parents()[1]).find('span')[2]).text(horaFim);
+		$("#HorarioFinalCPS").val(horaFim);
+			
+		solicitaEstados();
+	}
 
     // Set url defaults from config file
     function setURL()
@@ -196,31 +212,14 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	 * Opens the camera to read a QR code and redirect to confirmation screen
 	 */
 	function solicitarQrCode() {
-		cordova.plugins.barcodeScanner.scan(
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		scanner.scan(
 			function (result) {
-				if(result.text!=null) {
-					var d = new Date();
-					var hour = d.getHours();
-					var mins = d.getMinutes();
-
-					if (mins >= 45) {
-						hour++;
-						mins = 0;
-					} else {
-						while((mins % 15) != 0) {
-							mins++;
-						}
-					}
-				}
-
-				var horaInicio = hour + ":" + ((mins < 10) ? "0" : "") + mins;
-				var horaFim = hour+1 + ":" + ((mins < 10) ? "0" : "") + mins;
-
 				idSalaQrCode = result.text;
-
+			
 				solicitaEstadoQRCode(idSalaQrCode);
 			}
-		)
+		);
 	}
 
 	/**
@@ -228,7 +227,26 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	 */
 	function agendaViaQrCode() {
 		$.mobile.loading( 'show' );
-		agendaSala(idSalaQrCode, $("#horaIni").val(), $("#horaFim").val());
+		
+		var horaInicio = $("#HorarioInicioCPS").val();
+		var horaFim = $("#HorarioFinalCPS").val();
+		
+		agendaSala(idSalaQrCode, horaInicio, horaFim);
+		
+		$('#salaInfo').html(getDescSala(idSalaQrCode));
+	}
+	
+	/**
+	 * Returns to the rooms screen (with the updated status)
+	 */
+	function voltarSalas() {
+		window.location.href = "GetARoom.html#";
+		
+		/* adds a delay to wait browser to change the components or else the loading 
+		 * spinner would be called before and closed after the browser refresh, not being shown */
+		setTimeout(function(){
+			atualizaEstados();
+		}, 100);		
 	}
 
 	/**
@@ -285,14 +303,14 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 							$("#sala_nao_disponivel").show();
 							$("#opcoes_confirmacao").hide();
 						}
-
+							
 						window.location.href = window.location.href.split('#')[0] + "#confirma_qr_code";
 					}
                 });
             }
         });
 	}
-
+	
     // Get status from rooms of a city
     function solicitaEstados()
     {
@@ -411,9 +429,9 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 		agendaSala(sala.id, $("#horaIni").val(), $("#horaFim").val());
     }
-
-	function agendaSala(salaId, horaIni, horaFim) {
-        url = urlRoomsId;		
+	
+	function agendaSala(salaId, horaIni, horaFim) {	
+        url = urlRoomsId;
         $.ajax({
             url: url,
             type: 'POST',
@@ -428,13 +446,11 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                 // room free
                 if($.parseJSON(data.responseText).estado == "livre"){
-                    window.location.href = window.location.href.split('#')[0] +
-                    "#reservou" + "?" + window.localStorage.getItem('cidade').split('#')[1];
+                    window.location.href = window.location.href.split('#')[0] + "#reservou";
                 }
                 // room busy
                 else {
-                    window.location.href = window.location.href.split('#')[0] +
-                    "#nreservou" + "?" + window.localStorage.getItem('cidade').split('#')[1];
+                    window.location.href = window.location.href.split('#')[0] + "#nreservou";
                 }
             }
         });
@@ -555,7 +571,7 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	var idSalaQrCode;
 
 	// maps the description with the ID of the room
-	var salasIdDesc = {"salaReuniaoC":"REUNIÃO C", "salaReuniaoD":"REUNIÃO D", "salaApoio03":"APOIO 3", "salaApoio04":"APOIO 4", "salaApoio05":"APOIO 5", "salaApoio06":"APOIO 6", "salaApoio10":"APOIO 10"};
+	var salasIdDesc = {"salaReuniaoC":"REUNI\u00c3O C", "salaReuniaoD":"REUNI\u00c3O D", "salaApoio03":"APOIO 3", "salaApoio04":"APOIO 4", "salaApoio05":"APOIO 5", "salaApoio06":"APOIO 6", "salaApoio10":"APOIO 10"};
 
 	// returns the description of the room with the received ID
 	function getDescSala(idSala){
